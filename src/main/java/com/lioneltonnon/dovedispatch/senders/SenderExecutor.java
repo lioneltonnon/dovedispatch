@@ -22,6 +22,6 @@ public class SenderExecutor implements RoleExecutor, ISender {
 
     @Override
     public void send(String message) {
-        senderQueueService.sendMessage(message);
+        senderQueueService.send(message);
     }
 }
