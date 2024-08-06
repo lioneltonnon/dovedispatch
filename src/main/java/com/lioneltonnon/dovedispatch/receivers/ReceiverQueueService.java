@@ -6,19 +6,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ReceiverQueueService {
+public class ReceiverQueueService implements IReceiver {
 
     private final RabbitTemplate rabbitTemplate;
-    private final ApplicationProperties properties;
 
     @Autowired
-    public ReceiverQueueService(RabbitTemplate rabbitTemplate, ApplicationProperties properties) {
+    public ReceiverQueueService(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
-        this.properties = properties;
     }
 
-    public String receiveMessage() {
-        String message = (String) rabbitTemplate.receiveAndConvert(properties.getRabbitmq().getQueue());
+    @Override
+    public String receive() {
+        String message = (String) rabbitTemplate.receiveAndConvert("defaultQueue");
         return message != null ? message : "No message received";
     }
 }
