@@ -1,4 +1,4 @@
-package com.lioneltonnon.dovedispatch.shared;
+package com.lioneltonnon.dovedispatch.common;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
