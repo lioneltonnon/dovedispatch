@@ -2,65 +2,53 @@ package com.lioneltonnon.dovedispatch.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "app")
+@ConfigurationProperties(prefix = "app.rabbitmq")
 public class ApplicationProperties {
 
-    private Rabbitmq rabbitmq = new Rabbitmq();
+    private String host;
+    private int port;
+    private String username;
+    private String password;
+    private String queue;
 
-    public Rabbitmq getRabbitmq() {
-        return rabbitmq;
+    // Getters and setters
+    public String getHost() {
+        return host;
     }
 
-    public void setRabbitmq(Rabbitmq rabbitmq) {
-        this.rabbitmq = rabbitmq;
+    public void setHost(String host) {
+        this.host = host;
     }
 
-    public static class Rabbitmq {
-        private String host;
-        private int port;
-        private String username;
-        private String password;
-        private String queue;
+    public int getPort() {
+        return port;
+    }
 
-        // Getters and setters
-        public String getHost() {
-            return host;
-        }
+    public void setPort(int port) {
+        this.port = port;
+    }
 
-        public void setHost(String host) {
-            this.host = host;
-        }
+    public String getUsername() {
+        return username;
+    }
 
-        public int getPort() {
-            return port;
-        }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-        public void setPort(int port) {
-            this.port = port;
-        }
+    public String getPassword() {
+        return password;
+    }
 
-        public String getUsername() {
-            return username;
-        }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-        public void setUsername(String username) {
-            this.username = username;
-        }
+    public String getQueue() {
+        return queue;
+    }
 
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
-
-        public String getQueue() {
-            return queue;
-        }
-
-        public void setQueue(String queue) {
-            this.queue = queue;
-        }
+    public void setQueue(String queue) {
+        this.queue = queue;
     }
 }
