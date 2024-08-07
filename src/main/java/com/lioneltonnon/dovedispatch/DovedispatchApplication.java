@@ -11,19 +11,17 @@ import com.lioneltonnon.dovedispatch.receivers.ReceiverExecutor;
 public class DovedispatchApplication {
 
 	public static void main(String[] args) {
-		// Start the Spring Boot application
 		ApplicationContext context = SpringApplication.run(DovedispatchApplication.class, args);
 
-		// Retrieve the RoleManager bean to determine the role
 		RoleManager roleManager = context.getBean(RoleManager.class);
 
-		// Determine the role and execute the appropriate logic
 		String role = roleManager.getRole();
+		System.out.println("Configured role: " + role);
 
-		if ("producer".equalsIgnoreCase(role)) {
+		if ("producer".equalsIgnoreCase(role.trim())) {
 			SenderExecutor senderExecutor = context.getBean(SenderExecutor.class);
 			senderExecutor.execute();
-		} else if ("consumer".equalsIgnoreCase(role)) {
+		} else if ("consumer".equalsIgnoreCase(role.trim())) {
 			ReceiverExecutor receiverExecutor = context.getBean(ReceiverExecutor.class);
 			receiverExecutor.execute();
 		} else {
