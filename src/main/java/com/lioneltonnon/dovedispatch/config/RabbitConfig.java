@@ -11,12 +11,22 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.PostConstruct;
 
 @EnableRabbit
 public class RabbitConfig {
 
     @Autowired
     private ApplicationProperties customProperties;
+
+    // Check if properties were injected
+    @PostConstruct
+    public void init() {
+        System.out.println("Exchange Name: " + customProperties.getExchange());
+        System.out.println("Queue Name: " + customProperties.getQueue());
+        System.out.println("Routing Key: " + customProperties.getRoutingKey());
+    }
+
 
     @Bean
     public CachingConnectionFactory connectionFactory() {
