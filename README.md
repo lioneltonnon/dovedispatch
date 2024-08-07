@@ -7,16 +7,17 @@ In it, a Sender service and a Receiver service communicate via a shared RabbitMQ
 
 - Java 21 or higher
 - Maven 3.9.8 or higher
+- RabbitMQ Service
 
 ## Building the Application
 
-To build the application, run the following command in the project root:
+To build the application, clone the repo, then run the following command in the project root:
 
 ```shell
 mvn clean package
 ```
 
-After building, you can run it with the following command:
+After building, start the RabbitMQ Service, then run the application with the following command:
 
 ```shell
 java -jar target/dove-dispatch-0.0.1.jar
