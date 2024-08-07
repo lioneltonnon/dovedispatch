@@ -4,6 +4,7 @@ import com.lioneltonnon.dovedispatch.role.RoleExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
+// Executes logic for sending messages and manages the sending process
 @Component
 public class SenderExecutor implements RoleExecutor, ISender {
 

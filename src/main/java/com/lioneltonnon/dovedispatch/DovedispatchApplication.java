@@ -7,6 +7,8 @@ import com.lioneltonnon.dovedispatch.role.RoleManager;
 import com.lioneltonnon.dovedispatch.senders.SenderExecutor;
 import com.lioneltonnon.dovedispatch.receivers.ReceiverExecutor;
 
+// The main entry point for the application, configuring the Spring Boot application.
+
 @SpringBootApplication
 public class DovedispatchApplication {
 

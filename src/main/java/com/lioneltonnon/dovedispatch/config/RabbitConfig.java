@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import jakarta.annotation.PostConstruct;
 
+// Used for configuring RabbitMQ-related settings, such as queues, exchanges, and bindings.
+
 @Configuration
 @EnableRabbit
 public class RabbitConfig {

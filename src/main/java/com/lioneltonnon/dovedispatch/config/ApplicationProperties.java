@@ -4,6 +4,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import jakarta.annotation.PostConstruct;
 
+
+// Used to map application properties, providing a structured way to access configuration parameters.
+
 @Component
 @ConfigurationProperties(prefix = "spring.rabbitmq")
 public class ApplicationProperties {

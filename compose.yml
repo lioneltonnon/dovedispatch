@@ -8,8 +8,10 @@ services:
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
+      RABBITMQ_DEFAULT_USER: dove
+      RABBITMQ_DEFAULT_PASS: dispatch
+    networks:
+      - rabbitmq_network
 
   app:
     build:
@@ -17,12 +19,21 @@ services:
       dockerfile: Dockerfile
     container_name: dovedispatch
     ports:
-      - "8080:8080"  # Map application port
+      - "8080:8080"
     environment:
       SPRING_RABBITMQ_HOST: rabbitmq
       SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: dove
+      SPRING_RABBITMQ_PASSWORD: dispatch
     depends_on:
       - rabbitmq
+    command: >
+      sh -c "./wait-for-it.sh rabbitmq:5672 --timeout=60 --strict -- ./start-your-app-command"
+    networks:
+      - rabbitmq_network
 
 volumes:
   rabbitmq_data:
+
+networks:
+  rabbitmq_network:

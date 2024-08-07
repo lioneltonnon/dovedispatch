@@ -5,6 +5,7 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+//Handles interactions with the message queue for the receiver, such as fetching messages and acknowledging them
 @Service
 public class ReceiverQueueService implements IReceiver {
 

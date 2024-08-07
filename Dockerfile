@@ -7,8 +7,13 @@ WORKDIR /app
 # Copy the packaged jar file into the container
 COPY target/dovedispatch-0.0.1-SNAPSHOT.jar app.jar
 
+
+# Copy the wait-for-it script into the container
+COPY wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
+
 # Expose the application port
 EXPOSE 8080
 
-# Run the jar file
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Use the wait-for-it script to delay the start of the application
+ENTRYPOINT ["/wait-for-it.sh", "rabbitmq:5672", "--", "java", "-jar", "app.jar"]

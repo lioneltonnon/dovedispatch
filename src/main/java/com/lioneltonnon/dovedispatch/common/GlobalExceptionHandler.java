@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 
+
+// Used to handle global exceptions in a unified way, ensuring consistent error responses.
 @ControllerAdvice
 public class GlobalExceptionHandler {
 

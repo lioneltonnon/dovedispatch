@@ -5,6 +5,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
 
+// Executes logic for processing received messages
 @Component
 public class ReceiverExecutor implements RoleExecutor {
 

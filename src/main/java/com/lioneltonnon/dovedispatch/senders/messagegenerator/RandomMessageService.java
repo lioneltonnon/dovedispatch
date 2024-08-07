@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+// Random String Generator
 @Service
 public class RandomMessageService implements IMessageGenerator {
 
