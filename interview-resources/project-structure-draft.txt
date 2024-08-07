@@ -1,0 +1,29 @@
+/messaging-app
+  /src
+    /main
+      /java
+        /com/example/messaging
+          /config
+            - RabbitMQConfig.java
+            - ApplicationProperties.java
+          /role
+            - RoleManager.java
+          /senders
+            - IProducer.java
+            - ProducerExecutor.java
+            - SenderQueueService.java
+          /receivers
+            - IConsumer.java
+            - ConsumerExecutor.java
+            - ReceiverQueueService.java
+          /common
+            - QueueOperations.java
+            - GlobalExceptionHandler.java
+      /resources
+        - application.properties
+        - application-producer.properties
+        - application-consumer.properties
+  /infrastructure
+    - Dockerfile
+    - docker-compose.yaml
+  - pom.xml
