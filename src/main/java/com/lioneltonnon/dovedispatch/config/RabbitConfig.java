@@ -66,16 +66,11 @@ public class RabbitConfig {
 
     @Bean
     public DirectExchange exchange() {
-        return new DirectExchange(customProperties.getExchange(),true,false);
+        return new DirectExchange(customProperties.getExchange(), true, false);
     }
 
     @Bean
     public Binding binding(Queue queue, DirectExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(customProperties.getRoutingKey());
-    }
-
-    @RabbitListener(queues = "${spring.rabbitmq.queue}")
-    public void receiveMessage(String message) {
-        System.out.println("Received message: " + message);
     }
 }
