@@ -22,6 +22,7 @@ public class RabbitConfig {
     // Check if properties were injected
     @PostConstruct
     public void init() {
+        System.out.println("RabbitConfig loaded with: ");
         System.out.println("Exchange Name: " + customProperties.getExchange());
         System.out.println("Queue Name: " + customProperties.getQueue());
         System.out.println("Routing Key: " + customProperties.getRoutingKey());
