@@ -4,7 +4,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties(prefix = "spring.rabbitmq")
+@ConfigurationProperties(prefix = "rabbitmq")
 public class ApplicationProperties {
 
     private String host;
@@ -13,6 +13,8 @@ public class ApplicationProperties {
     private String password;
     private String virtualHost;
     private String queue;
+    private String exchange;
+    private String routingKey;
 
     // Getters and setters
 
@@ -48,13 +50,13 @@ public class ApplicationProperties {
         this.password = password;
     }
 
-//    public String getVirtualHost() {
-//        return virtualHost;
-//    }
-//
-//    public void setVirtualHost(String virtualHost) {
-//        this.virtualHost = virtualHost;
-//    }
+    public String getVirtualHost() {
+        return virtualHost;
+    }
+
+    public void setVirtualHost(String virtualHost) {
+        this.virtualHost = virtualHost;
+    }
 
     public String getQueue() {
         return queue;
@@ -62,5 +64,21 @@ public class ApplicationProperties {
 
     public void setQueue(String queue) {
         this.queue = queue;
+    }
+
+    public String getExchange() {
+        return exchange;
+    }
+
+    public void setExchange(String exchange) {
+        this.exchange = exchange;
+    }
+
+    public String getRoutingKey() {
+        return routingKey;
+    }
+
+    public void setRoutingKey(String routingKey) {
+        this.routingKey = routingKey;
     }
 }
