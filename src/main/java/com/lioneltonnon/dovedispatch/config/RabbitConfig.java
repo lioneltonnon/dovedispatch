@@ -1,39 +1,54 @@
 package com.lioneltonnon.dovedispatch.config;
 
-import com.lioneltonnon.dovedispatch.config.ApplicationProperties;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
-import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Configuration
-@EnableConfigurationProperties(ApplicationProperties.class)
+@EnableRabbit
 public class RabbitConfig {
 
+    @Autowired
+    private ApplicationProperties customProperties;
+
     @Bean
-    public CachingConnectionFactory connectionFactory(ApplicationProperties properties) {
-        CachingConnectionFactory factory = new CachingConnectionFactory(properties.getHost());
-        factory.setPort(properties.getPort());
-        factory.setUsername(properties.getUsername());
-        factory.setPassword(properties.getPassword());
-        factory.setChannelCacheSize(25);
-        factory.setPublisherConfirmType(CachingConnectionFactory.ConfirmType.CORRELATED);
-        factory.setPublisherReturns(true);
+    public CachingConnectionFactory connectionFactory() {
+        CachingConnectionFactory factory = new CachingConnectionFactory();
+        // Set additional connection properties if necessary
         return factory;
     }
 
     @Bean
     public RabbitTemplate rabbitTemplate(CachingConnectionFactory connectionFactory) {
-        RabbitTemplate template = new RabbitTemplate(connectionFactory);
-        template.setMandatory(true); // Necessary for publisher returns
-        return template;
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setExchange(customProperties.getExchange());
+        return rabbitTemplate;
     }
 
     @Bean
-    public Queue queue(ApplicationProperties properties) {
-        return new Queue(properties.getQueue(), true); // durable queue
+    public Queue queue() {
+        return new Queue(customProperties.getQueue(), true);
+    }
+
+    @Bean
+    public DirectExchange exchange() {
+        return new DirectExchange(customProperties.getExchange());
+    }
+
+    @Bean
+    public Binding binding(Queue queue, DirectExchange exchange) {
+        return BindingBuilder.bind(queue).to(exchange).with(customProperties.getRoutingKey());
+    }
+
+    @RabbitListener(queues = "${rabbitmq.queue}")
+    public void receiveMessage(String message) {
+        System.out.println("Received message: " + message);
     }
 }
