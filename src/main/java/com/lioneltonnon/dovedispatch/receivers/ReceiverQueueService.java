@@ -9,10 +9,15 @@ import org.springframework.stereotype.Service;
 public class ReceiverQueueService implements IReceiver {
 
     private final RabbitTemplate rabbitTemplate;
+    private final String exchangeName;
+    private final String routingKey;
 
     @Autowired
-    public ReceiverQueueService(RabbitTemplate rabbitTemplate) {
+    public ReceiverQueueService(RabbitTemplate rabbitTemplate, ApplicationProperties customProperties) {
         this.rabbitTemplate = rabbitTemplate;
+        this.exchangeName = customProperties.getExchange();
+        this.routingKey = customProperties.getRoutingKey();
+        System.out.println("Initialized SenderQueueService with Exchange: " + this.exchangeName + ", Routing Key: " + this.routingKey);
     }
 
     @Override
