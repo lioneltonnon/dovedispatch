@@ -17,6 +17,7 @@ public class SenderQueueService implements ISender {
         this.rabbitTemplate = rabbitTemplate;
         this.exchangeName = customProperties.getExchange();
         this.routingKey = customProperties.getRoutingKey();
+        System.out.println("Initialized SenderQueueService with Exchange: " + this.exchangeName + ", Routing Key: " + this.routingKey);
     }
 
     @Override
