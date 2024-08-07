@@ -2,9 +2,10 @@ package com.lioneltonnon.dovedispatch.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import jakarta.annotation.PostConstruct;
 
 @Component
-@ConfigurationProperties(prefix = "rabbitmq")
+@ConfigurationProperties(prefix = "spring.rabbitmq")
 public class ApplicationProperties {
 
     private String host;
@@ -17,6 +18,14 @@ public class ApplicationProperties {
     private String routingKey;
 
     // Getters and setters
+
+    @PostConstruct
+    public void init() {
+        System.out.println("ApplicationProperties initialized with:");
+        System.out.println("Exchange: " + exchange);
+        System.out.println("Queue: " + queue);
+        System.out.println("Routing Key: " + routingKey);
+    }
 
     public String getHost() {
         return host;
