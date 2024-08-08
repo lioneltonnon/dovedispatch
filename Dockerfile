@@ -16,4 +16,4 @@ RUN chmod +x /wait-for-it.sh
 EXPOSE 8080
 
 # Use the wait-for-it script to delay the start of the application
-ENTRYPOINT ["/wait-for-it.sh", "rabbitmq:5672", "--", "java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
