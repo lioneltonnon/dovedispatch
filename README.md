@@ -5,22 +5,30 @@ In it, a Sender service and a Receiver service communicate via a shared RabbitMQ
 
 ## Prerequisites
 
-- Java 21 or higher
-- Maven 3.9.8 or higher
-- RabbitMQ Service
+- Docker
+- Docker-compose
+## Running the Application
 
-## Building the Application
-
-To build the application, clone the repo, then run the following command in the project root:
-
+First, clone the repo to your local machine, and go into the repo directory:
 ```shell
-mvn clean package
+git clone https://github.com/your-username/dovedispatch.git
+cd dovedispatch
 ```
 
-After building, start the RabbitMQ Service, then run the application with the following command:
+ then run the following command in the project root:
 
 ```shell
-java -jar target/dove-dispatch-0.0.1.jar
+docker-compose up
 ```
 
-The application will start and be accessible at http://localhost:8080.
+## Access the Application
+
+RabbitMQ Management UI: Visit http://localhost:15672 to access the RabbitMQ Management UI. Log in with the following credentials:
+
+## Stopping the Application
+
+To stop the application, run the following command:
+
+```shell
+docker-compose up
+```
